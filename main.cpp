@@ -12,6 +12,7 @@ May 4, 2022
 
 using namespace std;
 
+/*
 string toLowerCase(string word)
 {
 	for (int i = 0; i < word.size(); i++)
@@ -20,6 +21,7 @@ string toLowerCase(string word)
 	}
 	return word;
 }
+*/
 
 int main()
 {
@@ -62,34 +64,33 @@ int main()
 		cin >> command;
 
 		string color;
-		char start, end;
+		char source, dest;
 		string to;
-		cin >> start >> to >> end;
-
+		cin >> source >> to >> dest;
+		source = tolower(source);
+		dest = tolower(dest);
 		// Clear terminal with linebreaks
 		for (int i = 0; i < 100; i++)
 			cout << '\n';
 
-		if (towers[tolower(start) - 'a'].size() == 0 || start == end)
+		if (towers[source - 'a'].size() == 0 || source == dest)
 		{
 			cout << "/****** INVALID MOVE *******/\n";
 			continue;
 		}
 
-		int diskValue = towers[tolower(start) - 'a'].back();
+		int sourceDisk = towers[source - 'a'].back();
 
-		if (towers[tolower(end) - 'a'].size() && diskValue > towers[tolower(end) -'a'].back())
+		if (towers[dest - 'a'].size() && sourceDisk > towers[dest -'a'].back())
 		{
 			cout << "/****** INVALID MOVE *******/\n";
 			continue;
 		}
 		
 		// Move disk
-		towers[tolower(end) -'a'].push_back(diskValue);
-		towers[tolower(start) - 'a'].pop_back();
+		towers[dest -'a'].push_back(sourceDisk);
+		towers[source - 'a'].pop_back();
 		cout << "/****** SUCCESSFULLY MOVED ******/\n";
-
-
 
 	}
 }
